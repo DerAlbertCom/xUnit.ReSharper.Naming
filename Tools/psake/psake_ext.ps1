@@ -10,6 +10,20 @@ function Get-Git-Commit
 	} 	
 	return $tmpString[$index].SubString(0,6)
 }
+
+function GetAssemblyBuild($assembly)
+{
+	$version =  GetAssemblyVersion -assembly $assembly 
+	return $version.ToString().Split('.')[2]
+}
+function GetAssemblyVersion
+{
+param(
+ [string]$assembly = $(throw "assembly is a required parameter.")
+)
+	return [System.Reflection.Assembly]::LoadFile($assembly).GetName().Version
+}
+
 function Generate-Assembly-Info
 {
 param(
