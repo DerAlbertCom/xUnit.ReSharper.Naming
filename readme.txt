@@ -12,7 +12,6 @@ Additional Naming Entities for given specific naming styles to
 
 xUnit.NET Test and xUnit.NET BDD Extensions Specifications
 
-
 Simply copy the Assembly to your ReSharper PlugIn Folder, don't
 forget to create a folder named xUnitNaming in that.
 
@@ -23,7 +22,7 @@ ReSharper-PlugIn Folder
 v5.1 is the ReSharper Version
 vs10.0 is the Visual Studio Version
 
-PlugIn between ReSharper Version are NOT interchangeable.
+PlugIns between ReSharper Version are NOT interchangeable.
 In this release only a Version for 5.1 is included, for other
 Version of ReSharper you have to build it by yourself.
 
@@ -37,3 +36,10 @@ xUnit.NET BDD Extensions
 ------------------------
 http://github.com/BjRo/xunitbddextensions
 
+
+xUnitContrib
+------------
+http://xunitcontrib.codeplex.com
+Portions of the PlugIn Code is from the ReSharper Runner Plug-In from Matt Ellis
+but he don't want include naming entities in the runner, so i decided to release
+it as a standalone plugin
