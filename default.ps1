@@ -58,6 +58,6 @@ task Release -depends Compile {
     
       & $tools_dir\Zip\zip.exe -9 -A -j `
         $release_dir\xUnit.ReSharper.Naming.$release_name.zip `
-        $build_dir\xUnit.ReSharper.Naming.dll
+        $build_dir\xUnit.ReSharper.Naming.dll readme.txt
     }
 }
