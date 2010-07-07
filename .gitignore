@@ -3,7 +3,9 @@
 [Bb]uild/
 [Bb]in/
 [Oo]bj/
-external/ReSharper
+external/ReSharper/*
+external/xUnit/*
+external/nUnit/*
 ThirdParty/ReSharper*
 _ReSharper.*/
 *.suo

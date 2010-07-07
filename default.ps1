@@ -8,7 +8,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.ReSharper.Naming.sln" 
-  $version = "0.5.1."
+  $version = "0.5.2."
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
   $release_name = "${version}_X${xunit_ver}_R${resharper_ver}"
@@ -20,12 +20,15 @@ task default -depends Release
 
 task Clean { 
   remove-item -force -recurse $buildartifacts_dir -ErrorAction SilentlyContinue 
-  remove-item -force -recurse $release_dir\*${resharper_ver}*.* -ErrorAction SilentlyContinue 
+  remove-item -force -recurse $release_dir\*${release_name}*.* -ErrorAction SilentlyContinue 
   remove-item -force -recurse $lib_dir\ReSharper\*.* -ErrorAction SilentlyContinue 
   remove-item -force -recurse $lib_dir\xUnit\*.* -ErrorAction SilentlyContinue 
 } 
 
 task CopyThirdParty -depends Clean {
+    new-item $lib_dir\ReSharper -itemType directory -ErrorAction SilentlyContinue 
+    new-item $lib_dir\xUnit -itemType directory -ErrorAction SilentlyContinue 
+
 	copy "$thirdparty_dir\ReSharper_$resharper_ver\*.*" "$lib_dir\ReSharper\"
 	copy "$thirdparty_dir\xunit_$xunit_ver\*.*" "$lib_dir\xunit\"
 }
@@ -59,6 +62,7 @@ task Release -depends Compile {
     
       & $tools_dir\Zip\zip.exe -9 -A -j `
         $release_dir\xUnit.ReSharper.Naming.$release_name.zip `
-        $build_dir\xUnit.ReSharper.Naming.dll readme.txt
+        $build_dir\xUnit.ReSharper.Naming.dll readme.txt `
+		$lib_dir\xUnit\xUnit.dll
     }
 }
