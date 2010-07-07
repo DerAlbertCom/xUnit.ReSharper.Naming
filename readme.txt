@@ -23,8 +23,7 @@ v5.1 is the ReSharper Version
 vs10.0 is the Visual Studio Version
 
 PlugIns between ReSharper Version are NOT interchangeable.
-In this release only a Version for 5.1 is included, for other
-Version of ReSharper you have to build it by yourself.
+In this release only a Versions for 5.0 and 5.1 are included.
 
 
 xUnit.NET

@@ -1,4 +1,7 @@
 properties { 
+  $resharper_ver = "v5.1"
+  $xunit_ver = "v1.6"
+
   $base_dir  = resolve-path .
   $lib_dir = "$base_dir\external"
   $thirdparty_dir = "$base_dir\ThirdParty" 
@@ -8,8 +11,6 @@ properties {
   $version = "0.5.1."
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
-  $resharper_ver = "v5.1"
-  $xunit_ver = "v1.6"
   $release_name = "${version}_X${xunit_ver}_R${resharper_ver}"
 } 
 
@@ -19,7 +20,7 @@ task default -depends Release
 
 task Clean { 
   remove-item -force -recurse $buildartifacts_dir -ErrorAction SilentlyContinue 
-  remove-item -force -recurse $release_dir -ErrorAction SilentlyContinue 
+  remove-item -force -recurse $release_dir\*${resharper_ver}*.* -ErrorAction SilentlyContinue 
   remove-item -force -recurse $lib_dir\ReSharper\*.* -ErrorAction SilentlyContinue 
   remove-item -force -recurse $lib_dir\xUnit\*.* -ErrorAction SilentlyContinue 
 } 
@@ -45,7 +46,7 @@ task Init -depends CopyThirdParty  {
         -clsCompliant "false" `
         -copyright "Copyright © Albert Weinert 2010"
         
-    new-item $release_dir -itemType directory 
+    new-item $release_dir -itemType directory -ErrorAction SilentlyContinue 
     new-item $buildartifacts_dir -itemType directory 
 } 
 task Compile -depends Init   { 
