@@ -5,7 +5,12 @@ namespace xUnit.ReSharper.Naming
     public static class XunitBddExtensions
     {
         private static readonly CLRTypeName ConcernAttributeName = new CLRTypeName("Xunit.ConcernAttribute");
-        private static readonly CLRTypeName ObservationAttributeName = new CLRTypeName("Xunit.ObservationAttribute");
+
+        private static readonly CLRTypeName ObservationBaseAttributeName =
+            new CLRTypeName("Xunit.ObservationBaseAttribute");
+
+        private static readonly CLRTypeName ObservationAttributeName =
+            new CLRTypeName("Xunit.ObservationAttribute");
 
         public static bool IsConcern(this IDeclaredElement declaredElement)
         {
@@ -15,7 +20,7 @@ namespace xUnit.ReSharper.Naming
                 if (typeElement == null)
                     return false;
 
-                if (typeElement.HasAttributeInstance(ConcernAttributeName, false))
+                if (typeElement.HasAttributeInstance(ConcernAttributeName, true))
                     return true;
 
                 var types = typeElement.GetSuperTypes();
@@ -23,7 +28,7 @@ namespace xUnit.ReSharper.Naming
                 foreach (var declaredType in types)
                 {
                     var element = declaredType.GetTypeElement();
-                    if (element != null && element.HasAttributeInstance(ConcernAttributeName, false))
+                    if (element != null && element.HasAttributeInstance(ConcernAttributeName, true))
                     {
                         return true;
                     }
@@ -38,7 +43,9 @@ namespace xUnit.ReSharper.Naming
             {
                 var typeMember = declaredElement as ITypeMember;
                 if (typeMember != null)
-                    return typeMember.HasAttributeInstance(ObservationAttributeName, false);
+                    return
+                        typeMember.HasAttributeInstance(ObservationBaseAttributeName, true) ||
+                        typeMember.HasAttributeInstance(ObservationAttributeName, true);
             }
             return false;
         }

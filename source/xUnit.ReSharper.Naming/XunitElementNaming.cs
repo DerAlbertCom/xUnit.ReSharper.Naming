@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using JetBrains.Annotations;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Naming.Elements;
@@ -8,6 +9,17 @@ namespace xUnit.ReSharper.Naming
     [NamedElementsBag(null)]
     public class XunitElementNaming : ElementKindOfElementType
     {
+        static XunitElementNaming()
+        {
+            AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += CurrentDomainOnReflectionOnlyAssemblyResolve;
+        }
+
+        private static Assembly CurrentDomainOnReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
+        {
+           var names= args.Name.Split(',');
+            return Assembly.LoadFrom(names[0]);
+        }
+
         [UsedImplicitly]
         public static readonly IElementKind Observation =
             new XunitElementNaming("xunit.bddextension.observation",
