@@ -12,8 +12,11 @@ Additional Naming Entities for given specific naming styles to
 
 xUnit.NET Test and xUnit.NET BDD Extensions Specifications
 
-Simply copy the Assembly to your ReSharper PlugIn Folder, don't
+Simply copy the Assemblies  to your ReSharper PlugIn Folder, don't
 forget to create a folder named xUnitNaming in that.
+
+ - xUnit.ReSharper.Naming.dll
+ - xunit.dll
 
 ReSharper-PlugIn Folder
 -----------------------
@@ -24,7 +27,6 @@ vs10.0 is the Visual Studio Version
 
 PlugIns between ReSharper Version are NOT interchangeable.
 In this release only a Versions for 5.0 and 5.1 are included.
-
 
 xUnit.NET
 ---------
